@@ -2,13 +2,16 @@ import streamlit as st
 import psycopg2
 import pandas as pd
 import random
+from typing import Tuple
 
 CSV_URL = "https://raw.githubusercontent.com/shkkonda/imageEloCalc/main/nokiamon_image.csv"
 final_df = pd.read_csv(CSV_URL)
 
-def get_random_image(df) -> str:
-    left_image = random.choice(df['image_link'])
-    return left_image
+def get_random_image(df) -> Tuple[str, str]:
+    row = random.choice(df.index)
+    left_image = df.loc[row, 'image_link']
+    name = df.loc[row, 'name']
+    return left_image, name
 
 @st.cache_resource
 def get_database_connection():
@@ -22,10 +25,10 @@ def get_database_connection():
 
 # Create a form
 with st.form("my_form"):
-    random_image = get_random_image(final_df)
+    random_image, name = get_random_image(final_df)
     image_link = st.empty()
     image_link.image(random_image)
-    submit = st.form_submit_button("Submit")
+    submit = st.form_submit_button(name)
 
 # If the submit button is clicked, write the data to the database
 if submit:
