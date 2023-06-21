@@ -20,18 +20,35 @@ def get_database_connection():
     )
     return conn
 
-# Create a form
-with st.form("my_form"):
+# Create a grid layout with two columns
+col1, col2 = st.beta_columns(2)
+
+# Form 1 in the first column
+with col1.form("my_form"):
     random_image = get_random_image(final_df)
     image_link = st.empty()
     image_link.image(random_image)
     submit = st.form_submit_button("Submit")
 
-# If the submit button is clicked, write the data to the database
+# Form 2 in the second column
+with col2.form("my_form_2"):
+    random_image_2 = get_random_image(final_df)
+    image_link_2 = st.empty()
+    image_link_2.image(random_image_2)
+    submit_2 = st.form_submit_button("Submit")
+
+# If the submit button of Form 1 is clicked, write the data to the database
 if submit:
     cursor = get_database_connection().cursor()
     query = "INSERT INTO images (image_link) VALUES (%s)"
     cursor.execute(query, (random_image,))
+    get_database_connection().commit()
+
+# If the submit button of Form 2 is clicked, write the data to the database
+if submit_2:
+    cursor = get_database_connection().cursor()
+    query = "INSERT INTO images (image_link) VALUES (%s)"
+    cursor.execute(query, (random_image_2,))
     get_database_connection().commit()
 
 # Display a message
