@@ -16,7 +16,7 @@ def get_random_image_pair(df) -> Tuple[str, str]:
 
     return left_image, right_image
 
-left_image, right_image = get_random_image(final_df)
+left_image, right_image = get_random_image_pair(final_df)
 
 @st.cache_resource
 def get_database_connection():
