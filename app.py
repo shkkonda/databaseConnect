@@ -21,7 +21,7 @@ def get_database_connection():
     return conn
 
 # Create a grid layout with two columns
-col1, col2 = st.beta_columns(2)
+col1, col2 = st.columns(2)
 
 # Form 1 in the first column
 with col1.form("my_form"):
