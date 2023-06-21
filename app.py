@@ -1,8 +1,16 @@
 import streamlit as st
 import psycopg2
+import pandas as pd
+import random
 
-# Create a singleton object for the database connection
-@st.experimental_singleton
+CSV_URL = "https://raw.githubusercontent.com/shkkonda/imageEloCalc/main/nokiamon_image.csv"
+final_df = pd.read_csv(CSV_URL)
+
+def get_random_image(df) -> str:
+    left_image = random.choice(df['image_link'])
+    return left_image
+
+@st.cache_resource
 def get_database_connection():
     conn = psycopg2.connect(
         host="database-1.cv9g4hhrgmvg.us-east-1.rds.amazonaws.com",
@@ -14,15 +22,16 @@ def get_database_connection():
 
 # Create a form
 with st.form("my_form"):
-    name = st.text_input("Name")
-    email = st.text_input("Email")
+    random_image = get_random_image(final_df)
+    image_link = st.empty()
+    image_link.image(random_image)
     submit = st.form_submit_button("Submit")
 
 # If the submit button is clicked, write the data to the database
 if submit:
     cursor = get_database_connection().cursor()
-    query = "INSERT INTO users (name, email) VALUES (%s, %s)"
-    cursor.execute(query, (name, email))
+    query = "INSERT INTO images (image_link) VALUES (%s)"
+    cursor.execute(query, (random_image,))
     get_database_connection().commit()
 
 # Display a message
