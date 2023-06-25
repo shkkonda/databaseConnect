@@ -4,6 +4,19 @@ import pandas as pd
 import random
 from typing import List, Tuple
 
+st.markdown(
+    """
+    <style>
+    @media (max-width: 600px) {
+        .image-column {
+            width: 50% !important;
+        }
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 CSV_URL = "https://raw.githubusercontent.com/shkkonda/imageEloCalc/main/nokiamon_image.csv"
 final_df = pd.read_csv(CSV_URL)
 
