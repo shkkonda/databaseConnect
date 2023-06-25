@@ -28,6 +28,8 @@ def get_database_connection():
     )
     return conn
 
+wallet_address = st.text_input('Enter Wallet Address')  # New Field for Wallet Address
+
 # Create a grid layout with two columns
 col1, col2 = st.columns(2)
 
