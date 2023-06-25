@@ -36,13 +36,13 @@ col1, col2 = st.columns(2)
 # Form 1 in the first column
 with col1.form("my_form"):
     image_link = st.empty()
-    image_link.image(left_image)
+    image_link.image(left_image, use_column_width=True)
     submit = st.form_submit_button("Submit")
 
 # Form 2 in the second column
 with col2.form("my_form_2"):
     image_link_2 = st.empty()
-    image_link_2.image(right_image)
+    image_link_2.image(right_image, use_column_width=True)
     submit_2 = st.form_submit_button("Submit")
 
 # If the submit button of Form 1 is clicked, write the data to the database
