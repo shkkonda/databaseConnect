@@ -48,8 +48,8 @@ with col2.form("my_form_2"):
 # If the submit button of Form 1 is clicked, write the data to the database
 if submit:
     cursor = get_database_connection().cursor()
-    query = "INSERT INTO images (image_link) VALUES (%s)"
-    cursor.execute(query, (left_image,))
+    query = "INSERT INTO images_wallet (image_link, wallet_address) VALUES (%s, %s)"
+    cursor.execute(query, (left_image, wallet_address))
     get_database_connection().commit()
 
 # If the submit button of Form 2 is clicked, write the data to the database
