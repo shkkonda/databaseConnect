@@ -12,6 +12,11 @@ st.markdown(
             width: 50% !important;
         }
     }
+
+    img {
+        max-width: 650px !important;
+        height: auto !important;
+    }
     </style>
     """,
     unsafe_allow_html=True
