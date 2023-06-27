@@ -1,8 +1,12 @@
-@media (max-width: 650px) {
-    /* CSS rules to apply for mobile devices */
+@media (max-width: 400px) {
+    .esravye0 {
+        width: 250px;
+    }
+}
+
+@media (min-width: 400px) and (max-width: 650px) {
     .esravye0 {
         width: 300px;
     }
-    /* Additional mobile-specific styles... */
 }
 
