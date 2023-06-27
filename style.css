@@ -1,7 +1,6 @@
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 610px) {
     /* CSS rules to apply for mobile devices */
     .esravye0 {
-        background-color: blueviolet;
         width: 300px;
     }
     /* Additional mobile-specific styles... */
