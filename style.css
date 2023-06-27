@@ -1,3 +1,9 @@
-.css-u0yi3i {
-    background-color: blueviolet;
+@media screen and (max-width: 480px) {
+    /* CSS rules to apply for mobile devices */
+    .esravye0 {
+        background-color: blueviolet;
+        width: 300px;
+    }
+    /* Additional mobile-specific styles... */
 }
+
