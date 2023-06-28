@@ -71,7 +71,7 @@ if 'left_image' not in st.session_state:
 if 'right_image' not in st.session_state:
     st.session_state.right_image = right_image
     
-wallet_address = st.text_input('Enter Wallet Address (To be considered for free noki airdrops)')  # New Field for Wallet Address
+wallet_address = st.text_input('Enter Wallet Address (Optional - Add if you want be considered for free noki airdrops)')  # New Field for Wallet Address
 
 # Create a grid layout with two columns
 col1, col2 = st.columns(2)
