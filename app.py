@@ -71,7 +71,7 @@ if 'left_image' not in st.session_state:
 if 'right_image' not in st.session_state:
     st.session_state.right_image = right_image
     
-wallet_address = st.text_input('Enter Wallet Address')  # New Field for Wallet Address
+wallet_address = st.text_input('Enter Wallet Address (To be considered for free noki airdrops)')  # New Field for Wallet Address
 
 # Create a grid layout with two columns
 col1, col2 = st.columns(2)
@@ -96,6 +96,7 @@ if submit:
     get_database_connection().commit()
     st.session_state.left_image = left_image
     st.session_state.right_image = right_image
+    st.write("Good Choice, Data saved to database!")
 
 # If the submit button of Form 2 is clicked, write the data to the database
 if submit_2:
@@ -105,6 +106,6 @@ if submit_2:
     get_database_connection().commit()
     st.session_state.left_image = left_image
     st.session_state.right_image = right_image
+    st.write("Good Choice, Data saved to database!")
 
-# Display a message
-st.write("Data saved to database!")
+
