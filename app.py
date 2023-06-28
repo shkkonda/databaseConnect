@@ -94,6 +94,7 @@ if submit:
     query = "INSERT INTO images_wallet (left_image_link, right_image_link, selected_image_link, wallet_address) VALUES (%s, %s, %s, %s)"
     cursor.execute(query, (st.session_state.left_image, st.session_state.right_image, st.session_state.left_image, wallet_address))
     get_database_connection().commit()
+    st.session_state.left_image = left_image
 
 # If the submit button of Form 2 is clicked, write the data to the database
 if submit_2:
@@ -101,6 +102,7 @@ if submit_2:
     query = "INSERT INTO images_wallet (left_image_link, right_image_link, selected_image_link, wallet_address) VALUES (%s, %s, %s, %s)"
     cursor.execute(query, (st.session_state.left_image, st.session_state.right_image, st.session_state.right_image, wallet_address))
     get_database_connection().commit()
+    st.session_state.right_image = right_image
 
 # Display a message
 st.write("Data saved to database!")
