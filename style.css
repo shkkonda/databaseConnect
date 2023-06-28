@@ -1,12 +1,12 @@
 @media (max-width: 400px) {
     .esravye0 {
-        width: 150px;
+        width: 250px;
     }
 }
 
 @media (min-width: 400px) and (max-width: 650px) {
     .esravye0 {
-        width: 190px;
+        width: 300px;
     }
 }
 
