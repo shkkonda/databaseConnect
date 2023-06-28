@@ -7,19 +7,19 @@ from typing import List, Tuple
 with open('style.css') as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-CSV_URL = "https://raw.githubusercontent.com/shkkonda/imageEloCalc/main/nokiamon_image.csv"
-final_df = pd.read_csv(CSV_URL)
+# CSV_URL = "https://raw.githubusercontent.com/shkkonda/imageEloCalc/main/nokiamon_image.csv"
+# final_df = pd.read_csv(CSV_URL)
 
-def get_random_image_pair(df) -> Tuple[str, str]:
-    left_image = random.choice(df['image_link'])
-    right_image = random.choice(df['image_link'])
+# def get_random_image_pair(df) -> Tuple[str, str]:
+#     left_image = random.choice(df['image_link'])
+#     right_image = random.choice(df['image_link'])
 
-    while left_image == right_image:
-        right_image = random.choice(df['image_link'])
+#     while left_image == right_image:
+#         right_image = random.choice(df['image_link'])
 
-    return left_image, right_image
+#     return left_image, right_image
 
-left_image, right_image = get_random_image_pair(final_df)
+# left_image, right_image = get_random_image_pair(final_df)
 
 @st.cache_resource
 def get_database_connection():
@@ -30,6 +30,45 @@ def get_database_connection():
         database=""
     )
     return conn
+
+@st.cache  # Cache the DataFrame
+def fetch_table_as_dataframe():
+    conn = get_database_connection()
+    cursor = conn.cursor()
+
+    # Execute the query to fetch the table
+    cursor.execute("SELECT * FROM noki_combos")
+
+    # Fetch all the rows
+    rows = cursor.fetchall()
+
+    # Get the column names
+    columns = [desc[0] for desc in cursor.description]
+
+    # Create a DataFrame with the fetched data
+    df = pd.DataFrame(rows, columns=columns)
+
+    # Close the cursor and database connection
+    cursor.close()
+    conn.close()
+
+    return df
+
+# Usage
+noki_combos_df = fetch_table_as_dataframe()
+
+def get_random_images(df):
+    # Get a random row from the DataFrame
+    random_row = df.sample(n=1, random_state=random.seed())
+
+    # Extract the values from the 'noki_1' and 'noki_2' columns
+    left_image = random_row['noki_1'].values[0]
+    right_image = random_row['noki_2'].values[0]
+
+    # Return the left_image and right_image
+    return left_image, right_image
+
+left_image, right_image = get_random_images(noki_combos_df)
 
 wallet_address = st.text_input('Enter Wallet Address')  # New Field for Wallet Address
 
