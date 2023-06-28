@@ -66,6 +66,11 @@ def get_random_images(df):
 
 left_image, right_image = get_random_images(noki_combos_df)
 
+if 'left_image' not in st.session_state:
+    st.session_state.left_image = left_image
+if 'right_image' not in st.session_state:
+    st.session_state.right_image = right_image
+    
 wallet_address = st.text_input('Enter Wallet Address')  # New Field for Wallet Address
 
 # Create a grid layout with two columns
@@ -87,14 +92,14 @@ with col2.form("my_form_2"):
 if submit:
     cursor = get_database_connection().cursor()
     query = "INSERT INTO images_wallet (left_image_link, right_image_link, selected_image_link, wallet_address) VALUES (%s, %s, %s, %s)"
-    cursor.execute(query, (image_link.url, image_link_2.url, image_link.url, wallet_address))
+    cursor.execute(query, (st.session_state.left_image, st.session_state.right_image, st.session_state.left_image, wallet_address))
     get_database_connection().commit()
 
 # If the submit button of Form 2 is clicked, write the data to the database
 if submit_2:
     cursor = get_database_connection().cursor()
     query = "INSERT INTO images_wallet (left_image_link, right_image_link, selected_image_link, wallet_address) VALUES (%s, %s, %s, %s)"
-    cursor.execute(query, (image_link.url, image_link_2.url, image_link_2.url, wallet_address))
+    cursor.execute(query, (st.session_state.left_image, st.session_state.right_image, st.session_state.right_image, wallet_address))
     get_database_connection().commit()
 
 # Display a message
