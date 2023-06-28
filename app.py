@@ -3,9 +3,24 @@ import psycopg2
 import pandas as pd
 import random
 from typing import List, Tuple
+from streamlit.components.v1 import html
 
 with open('style.css') as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
+my_js = """
+    document.addEventListener("DOMContentLoaded", function(event) { 
+        var scrollpos = localStorage.getItem('scrollpos');
+        if (scrollpos) window.scrollTo(0, scrollpos);
+    });
+
+    window.onbeforeunload = function(e) {
+        localStorage.setItem('scrollpos', window.scrollY);
+    };
+"""
+
+my_html = f"<script>{my_js}</script>"
+html(my_html)
 
 # CSV_URL = "https://raw.githubusercontent.com/shkkonda/imageEloCalc/main/nokiamon_image.csv"
 # final_df = pd.read_csv(CSV_URL)
