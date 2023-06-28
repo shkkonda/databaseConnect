@@ -48,10 +48,6 @@ def fetch_table_as_dataframe():
     # Create a DataFrame with the fetched data
     df = pd.DataFrame(rows, columns=columns)
 
-    # Close the cursor and database connection
-    cursor.close()
-    conn.close()
-
     return df
 
 # Usage
