@@ -15,9 +15,6 @@
 
     .en8akda1 {
         border: none;
+        align-items: center;
+        text-align: center;
     }
-
-.en8akda1 {
-    align-items: center;
-    text-align: center;
-}
