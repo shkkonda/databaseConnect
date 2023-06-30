@@ -8,19 +8,7 @@ from streamlit.components.v1 import html
 with open('style.css') as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-my_js = """
-    document.addEventListener("DOMContentLoaded", function(event) { 
-        var scrollpos = localStorage.getItem('scrollpos');
-        if (scrollpos) window.scrollTo(0, scrollpos);
-    });
-
-    window.onbeforeunload = function(e) {
-        localStorage.setItem('scrollpos', window.scrollY);
-    };
-"""
-
-my_html = f"<script>{my_js}</script>"
-html(my_html)
+messages = ["Great choice!", "Well done!", "Fantastic!", "Awesome selection!"]
 
 # CSV_URL = "https://raw.githubusercontent.com/shkkonda/imageEloCalc/main/nokiamon_image.csv"
 # final_df = pd.read_csv(CSV_URL)
@@ -111,7 +99,9 @@ if submit:
     get_database_connection().commit()
     st.session_state.left_image = left_image
     st.session_state.right_image = right_image
-    st.write("Good Choice, Data saved to database!")
+    # Display a randomly selected success message
+    success_message = random.choice(messages)
+    st.write(success_message)
 
 # If the submit button of Form 2 is clicked, write the data to the database
 if submit_2:
@@ -121,6 +111,7 @@ if submit_2:
     get_database_connection().commit()
     st.session_state.left_image = left_image
     st.session_state.right_image = right_image
-    st.write("Good Choice, Data saved to database!")
-
+    # Display a randomly selected success message
+    success_message = random.choice(messages)
+    st.write(success_message)
 
