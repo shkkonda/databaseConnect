@@ -8,7 +8,23 @@ from streamlit.components.v1 import html
 with open('style.css') as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-messages = ["Great choice!", "Well done!", "Fantastic!", "Awesome selection!"]
+messages = [
+    "Great choice!",
+    "Well done!",
+    "Fantastic!",
+    "Awesome selection!",
+    "You've got good taste!",
+    "Impressive choice!",
+    "You're on a roll!",
+    "Excellent decision!",
+    "Way to go!",
+    "You're a Nokiamon master!",
+    "Outstanding selection!",
+    "That's a winner!",
+    "You know your Nokiamon!",
+    "Amazing pick!",
+    "That's a rare Nokiamon!"
+]
 
 # CSV_URL = "https://raw.githubusercontent.com/shkkonda/imageEloCalc/main/nokiamon_image.csv"
 # final_df = pd.read_csv(CSV_URL)
@@ -26,12 +42,7 @@ messages = ["Great choice!", "Well done!", "Fantastic!", "Awesome selection!"]
 
 @st.cache_resource
 def get_database_connection():
-    conn = psycopg2.connect(
-        host="database-1.cv9g4hhrgmvg.us-east-1.rds.amazonaws.com",
-        user="postgres",
-        password="eRYebFlJePOFRZeVVuQT",
-        database=""
-    )
+    conn = psycopg2.connect(**st.secrets["postgres"])
     return conn
 
 @st.cache  # Cache the DataFrame
