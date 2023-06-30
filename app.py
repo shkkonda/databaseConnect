@@ -45,7 +45,7 @@ def get_database_connection():
     conn = psycopg2.connect(**st.secrets["postgres"])
     return conn
 
-@st.cache  # Cache the DataFrame
+@st.cache_data  # Cache the DataFrame
 def fetch_table_as_dataframe():
     conn = get_database_connection()
     cursor = conn.cursor()
