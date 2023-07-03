@@ -3,7 +3,8 @@ import psycopg2
 import pandas as pd
 import random
 from typing import List, Tuple
-from streamlit.components.v1 import html
+
+st.title("NokiRank: Unleash Your Inner Nokiamon Judge!")
 
 with open('style.css') as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
@@ -105,7 +106,7 @@ with col2.form("my_form_2"):
 # If the submit button of Form 1 is clicked, write the data to the database
 if submit:
     cursor = get_database_connection().cursor()
-    query = "INSERT INTO images_wallet (left_image_link, right_image_link, selected_image_link, wallet_address) VALUES (%s, %s, %s, %s)"
+    query = "INSERT INTO noki_selections (left_image_link, right_image_link, selected_image_link, wallet_address) VALUES (%s, %s, %s, %s)"
     cursor.execute(query, (st.session_state.left_image, st.session_state.right_image, st.session_state.left_image, wallet_address))
     get_database_connection().commit()
     st.session_state.left_image = left_image
@@ -117,7 +118,7 @@ if submit:
 # If the submit button of Form 2 is clicked, write the data to the database
 if submit_2:
     cursor = get_database_connection().cursor()
-    query = "INSERT INTO images_wallet (left_image_link, right_image_link, selected_image_link, wallet_address) VALUES (%s, %s, %s, %s)"
+    query = "INSERT INTO noki_selections (left_image_link, right_image_link, selected_image_link, wallet_address) VALUES (%s, %s, %s, %s)"
     cursor.execute(query, (st.session_state.left_image, st.session_state.right_image, st.session_state.right_image, wallet_address))
     get_database_connection().commit()
     st.session_state.left_image = left_image
@@ -125,4 +126,3 @@ if submit_2:
     # Display a randomly selected success message
     success_message = random.choice(messages)
     st.write(success_message)
-
