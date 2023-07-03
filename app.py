@@ -132,6 +132,6 @@ else:
         get_database_connection().commit()
         st.session_state.left_image = left_image
         st.session_state.right_image = right_image
-    # Display a randomly selected success message
-    success_message = random.choice(messages)
-    st.write(success_message)
+        # Display a randomly selected success message
+        success_message = random.choice(messages)
+        st.write(success_message)
