@@ -14,7 +14,7 @@ with open('style.css') as f:
 menu_selection = option_menu(None, ["Home", "Ranks"], 
     icons=['house', "list-task"], 
     menu_icon="cast", default_index=0, orientation="horizontal")
-    menu_selection
+menu_selection
 
 
 if menu_selection == "Ranks":
