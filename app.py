@@ -3,6 +3,7 @@ import psycopg2
 import pandas as pd
 import random
 from typing import List, Tuple
+from streamlit_option_menu import option_menu
 
 st.title("NokiRank: Unleash Your Inner Nokiamon Judge!")
 
@@ -10,10 +11,13 @@ with open('style.css') as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 # Add the menu links to the sidebar
-menu_selection = st.sidebar.radio("Menu", ["Page 1", "Page 2"])
+menu_selection = option_menu(None, ["Home", "Ranks"], 
+    icons=['house', "list-task"], 
+    menu_icon="cast", default_index=0, orientation="horizontal")
+    menu_selection
 
 
-if menu_selection == "Page 2":
+if menu_selection == "Ranks":
     st.title("Page 2")
     # Add your code for the second page here
 else:
