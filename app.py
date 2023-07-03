@@ -12,7 +12,7 @@ with open('style.css') as f:
 
 # Add the menu links to the sidebar
 menu_selection = option_menu(None, ["Home", "Ranks"], 
-    icons=['house', "list-task"], 
+    icons=['image', "table"], 
     menu_icon="cast", default_index=0, orientation="horizontal")
 
 
