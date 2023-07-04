@@ -82,7 +82,7 @@ else:
     if 'right_image' not in st.session_state:
         st.session_state.right_image = right_image
 
-    wallet_address = st.text_input('Enter Wallet Address (Optional - Add if you want to be considered for free noki airdrops)')  # New Field for Wallet Address
+    wallet_address = st.text_input('Enter Wallet Address (Optional - Add if you want be considered for free noki airdrops)')  # New Field for Wallet Address
 
     # Create a grid layout with two columns
     col1, col2 = st.columns(2)
@@ -91,42 +91,39 @@ else:
     with col1.form("my_form"):
         image_link = st.empty()
         image_link.image(left_image, use_column_width=True)
-        submit = st.form_submit_button("Submit")
+        form_submit = st.form_submit_button("Submit")
 
     # Form 2 in the second column
     with col2.form("my_form_2"):
         image_link_2 = st.empty()
         image_link_2.image(right_image, use_column_width=True)
-        submit_2 = st.form_submit_button("Submit")
+        form_submit_2 = st.form_submit_button("Submit")
 
-    if st.session_state.submit:
-        if submit:
-            cursor = get_database_connection().cursor()
-            query = "INSERT INTO noki_selections_dev (left_image_link, right_image_link, selected_image_link, wallet_address) VALUES (%s, %s, %s, %s)"
-            cursor.execute(query,
-                           (st.session_state.left_image, st.session_state.right_image, st.session_state.left_image,
-                            wallet_address))
-            get_database_connection().commit()
-            success_message = random.choice(messages)
-            st.write(success_message)
-        # Reset the form submit flag
-        st.session_state.submit = False
+    # If the submit button of Form 1 is clicked, write the data to the database
+    if form_submit:
+        cursor = get_database_connection().cursor()
+        query = "INSERT INTO noki_selections_dev (left_image_link, right_image_link, selected_image_link, wallet_address) VALUES (%s, %s, %s, %s)"
+        cursor.execute(query, (st.session_state.left_image, st.session_state.right_image, st.session_state.left_image, wallet_address))
+        get_database_connection().commit()
+        st.session_state.left_image = left_image
+        st.session_state.right_image = right_image
+        # Display a randomly selected success message
+        success_message = random.choice(messages)
+        st.write(success_message)
 
-    if st.session_state.submit_2:
-        if submit_2:
-            cursor = get_database_connection().cursor()
-            query = "INSERT INTO noki_selections_dev (left_image_link, right_image_link, selected_image_link, wallet_address) VALUES (%s, %s, %s, %s)"
-            cursor.execute(query,
-                           (st.session_state.left_image, st.session_state.right_image, st.session_state.right_image,
-                            wallet_address))
-            get_database_connection().commit()
-            success_message = random.choice(messages)
-            st.write(success_message)
-        # Reset the form submit flag
-        st.session_state.submit_2 = False
+    # If the submit button of Form 2 is clicked, write the data to the database
+    if form_submit_2:
+        cursor = get_database_connection().cursor()
+        query = "INSERT INTO noki_selections_dev (left_image_link, right_image_link, selected_image_link, wallet_address) VALUES (%s, %s, %s, %s)"
+        cursor.execute(query, (st.session_state.left_image, st.session_state.right_image, st.session_state.right_image, wallet_address))
+        get_database_connection().commit()
+        st.session_state.left_image = left_image
+        st.session_state.right_image = right_image
+        # Display a randomly selected success message
+        success_message = random.choice(messages)
+        st.write(success_message)
 
     # Update session state variables on any non-submit interaction
-    if submit:
-        st.session_state.submit = True
-    if submit_2:
-        st.session_state.submit_2 = True
+    if not form_submit and not form_submit_2:
+        st.session_state.left_image = left_image
+        st.session_state.right_image = right_image
