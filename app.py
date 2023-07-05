@@ -15,6 +15,11 @@ menu_selection = option_menu(None, ["Home", "Ranks"],
                              icons=['image', "table"],
                              menu_icon="cast", default_index=0, orientation="horizontal")
 
+@st.cache_resource
+def get_database_connection():
+    conn = psycopg2.connect(**st.secrets["postgres"])
+    return conn
+
 if menu_selection == "Ranks":
     st.title("Page 2")
     # Add your code for the second page here
@@ -36,11 +41,6 @@ else:
         "Amazing pick!",
         "That's a rare Nokiamon!"
     ]
-
-    @st.cache_resource
-    def get_database_connection():
-        conn = psycopg2.connect(**st.secrets["postgres"])
-        return conn
 
     @st.cache_data  # Cache the DataFrame
     def fetch_table_as_dataframe():
