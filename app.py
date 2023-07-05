@@ -23,6 +23,7 @@ def get_database_connection():
 if menu_selection == "Ranks":
     st.title("Page 2")
     # Add your code for the second page here
+    conn = get_database_connection()
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM noki_selections")
 
