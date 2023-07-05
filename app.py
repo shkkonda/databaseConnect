@@ -203,5 +203,6 @@ else:
 
     # Increment the submission counter after each submission
     st.session_state.submission_counter += 1
+    st.write(session_state.submission_counter)
 
 
