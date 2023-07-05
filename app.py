@@ -85,16 +85,8 @@ if menu_selection == "Ranks":
     ratings_df = ratings_df.sort_values(by='elo_rating', ascending=False)[['nokiamon', 'elo_rating', 'games_played']]
 
     # Display ratings_df as a table with images
-    st.dataframe(ratings_df, height=500)
+    st.dataframe(ratings_df, height=500, hide_index=True)
 
-    # Add images to the first column
-    image_column = st.beta_columns(3)[0]
-    for _, row in ratings_df.iterrows():
-        image_link = row['nokiamon']
-        image_column.image(image_link, width=100)
-
-    # Show ratings_df with additional columns
-    st.dataframe(ratings_df)
     
 else:
     messages = [
