@@ -11,7 +11,7 @@ with open('style.css') as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 # Add the menu links to the sidebar
-menu_selection = option_menu(None, ["Home", "Ranks"],
+menu_selection = option_menu(None, ["Choose", "Ranks"],
                              icons=['image', "table"],
                              menu_icon="cast", default_index=0, orientation="horizontal")
 
@@ -19,6 +19,10 @@ menu_selection = option_menu(None, ["Home", "Ranks"],
 def get_database_connection():
     conn = psycopg2.connect(**st.secrets["postgres"])
     return conn
+
+# Counter to keep track of submissions
+if "submission_counter" not in st.session_state:
+    st.session_state.submission_counter = 0
 
 if menu_selection == "Ranks":
     # Add your code for the second page here
@@ -196,3 +200,8 @@ else:
     if not form_submit and not form_submit_2:
         st.session_state.left_image = left_image
         st.session_state.right_image = right_image
+
+    # Increment the submission counter after each submission
+    st.session_state.submission_counter += 1
+
+
