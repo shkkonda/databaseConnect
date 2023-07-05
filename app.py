@@ -78,10 +78,10 @@ if menu_selection == "Ranks":
     
     # Convert ratings dictionary to a DataFrame
     ratings_df = pd.DataFrame(ratings.items(), columns=['nokiamon', 'rating'])
-    ratings_df['games_played'] = ratings_df['nokiamon'].map(lambda x: ratings[x]['games'])
-    ratings_df['Matches Featured In'] = ratings_df['nokiamon'].map(lambda x: ratings[x]['rating'])
+    ratings_df['Matches Featured In'] = ratings_df['nokiamon'].map(lambda x: ratings[x]['games'])
+    ratings_df['elo_rating'] = ratings_df['nokiamon'].map(lambda x: ratings[x]['rating'])
     
-    ratings_df = ratings_df.sort_values(by='elo_rating', ascending=False)[['nokiamon', 'elo_rating', 'games_played']]
+    ratings_df = ratings_df.sort_values(by='elo_rating', ascending=False)[['nokiamon', 'elo_rating', 'Matches Featured In']]
 
     # Display ratings_df as a table with images
     st.dataframe(ratings_df, height=500, hide_index=True, column_config={
