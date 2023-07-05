@@ -88,8 +88,9 @@ if menu_selection == "Ranks":
     st.dataframe(ratings_df, height=500, hide_index=True, column_config={
         "nokiamon": st.column_config.ImageColumn(
             "Nokiamon", help="Image"
-        )
-    })
+        ),
+        "elo_rating": st.column_config.NumberColumn("Likability Score", format='%.0f')
+    }, use_container_width=True)
 
     
 else:
