@@ -168,12 +168,12 @@ else:
         if 'right_image' not in st.session_state:
             st.session_state.right_image = right_image
     
-        wallet_address = st.session_state.wallet_address
-        if 'wallet_address' not in st.session_state:
+        if "wallet_address" not in st.session_state:
             st.session_state.wallet_address = None
         
-        wallet_address = st.text_input('Enter Wallet Address (Optional - Add if you want to be considered for free Noki airdrops)', value=wallet_address)
+        wallet_address = st.text_input('Enter Wallet Address (Optional - Add if you want to be considered for free Noki airdrops)', value=st.session_state.wallet_address)
         st.session_state.wallet_address = wallet_address
+
     
         # Create a grid layout with two columns
         col1, col2 = st.columns(2)
