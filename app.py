@@ -27,6 +27,7 @@ def display_thank_you_note():
         st.session_state.submission_counter = 0
         st.session_state.left_image = None
         st.session_state.right_image = None
+        st.experimental_rerun()
     
 
 # Counter to keep track of submissions
