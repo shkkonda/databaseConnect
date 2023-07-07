@@ -25,6 +25,8 @@ def display_thank_you_note():
     continue_button = st.button("Continue rating more")
     if continue_button:
         st.session_state.submission_counter = 0
+        st.session_state.left_image = None
+        st.session_state.right_image = None
     
 
 # Counter to keep track of submissions
