@@ -22,7 +22,7 @@ def get_database_connection():
 
 def display_thank_you_note():
     st.write("Thank you for your submissions! You've been a great Nokiamon judge!")
-    continue_button = st.form_submit_button("Continue rating more")
+    continue_button = st.button("Continue rating more")
     if continue_button:
         st.session_state.submission_counter = 0
     
