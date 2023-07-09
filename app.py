@@ -96,10 +96,9 @@ if menu_selection == "Ranks":
     ratings_df['elo_rating'] = ratings_df['nokiamon'].map(lambda x: ratings[x]['rating'])
     
     ratings_df = ratings_df.sort_values(by='elo_rating', ascending=False)[['nokiamon', 'elo_rating', 'Matches Featured In']]
-    styled_df = ratings_df.style.set_properties(**{'text-align': 'center'}).set_table_styles([{'selector': 'th', 'props': [('text-align', 'center')]}])
 
     # Display ratings_df as a table with images
-    st.dataframe(styled_df, height=500, hide_index=True, column_config={
+    st.dataframe(ratings_df, height=500, hide_index=True, column_config={
         "nokiamon": st.column_config.ImageColumn(
             "Nokiamon", help="Image"
         ),
