@@ -169,7 +169,7 @@ else:
             st.session_state.right_image = right_image
     
         if "wallet_address" not in st.session_state:
-            st.session_state.wallet_address = None
+            st.session_state.wallet_address = ''
         
         wallet_address = st.text_input('Enter Wallet Address (Optional - Add if you want to be considered for free Noki airdrops)', value=st.session_state.wallet_address)
         st.session_state.wallet_address = wallet_address
