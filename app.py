@@ -11,7 +11,7 @@ with open('style.css') as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 # Add the menu links to the sidebar
-menu_selection = option_menu(None, ["Choose", "Ranks"],
+menu_selection = option_menu(None, ["Rate", "Ranks"],
                              icons=['image', "table"],
                              menu_icon="cast", default_index=0, orientation="horizontal")
 
