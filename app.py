@@ -223,6 +223,4 @@ else:
             st.session_state.left_image = left_image
             st.session_state.right_image = right_image
 
-        st.write(st.session_state.submission_counter)
-
 
