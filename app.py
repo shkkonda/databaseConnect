@@ -5,6 +5,7 @@ import random
 from typing import List, Tuple
 from streamlit_option_menu import option_menu
 import requests
+from streamlit.report_thread import get_report_ctx
 
 st.title("NokiRank: Unleash Your Inner Nokiamon Judge!")
 
@@ -31,10 +32,11 @@ def display_thank_you_note():
         st.experimental_rerun()
 
 def get_ip_address():
-  headers = st.get_request_headers()
-  ip_address = headers.get('X-Forwarded-For')
+  session_id = get_report_ctx().session_id
+  session_info = Server.get_current()._get_session_info(session_id)
+  ip_address = session_info.ws.request.headers.get('X-Forwarded-For')
   if ip_address is None:
-    ip_address = headers.get('Remote_Addr')
+    ip_address = session_info.ws.request.headers.get('Remote_Addr')
   return ip_address
 
 ip_address = get_ip_address()
