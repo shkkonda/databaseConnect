@@ -30,15 +30,14 @@ def display_thank_you_note():
         st.session_state.right_image = None
         st.experimental_rerun()
 
-@st.cache
-def get_ip():
-    ip = st.request.headers.get('X-Forwarded-For', None)
-    if ip is None:
-        ip = st.request.remote_ip
-    return ip
+def get_ip_address():
+  headers = st.get_request_headers()
+  ip_address = headers.get('X-Forwarded-For')
+  if ip_address is None:
+    ip_address = headers.get('Remote_Addr')
+  return ip_address
 
-
-ip = get_ip()
+ip_address = get_ip_address()
     
 
 # Counter to keep track of submissions
@@ -234,4 +233,4 @@ else:
             st.session_state.left_image = left_image
             st.session_state.right_image = right_image
 
-        st.write("Your IP address:", ip)
+        st.write("Your IP address:", ip_address)
