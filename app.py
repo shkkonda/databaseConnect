@@ -4,6 +4,7 @@ import pandas as pd
 import random
 from typing import List, Tuple
 from streamlit_option_menu import option_menu
+import requests
 
 st.title("NokiRank: Unleash Your Inner Nokiamon Judge!")
 
@@ -28,6 +29,16 @@ def display_thank_you_note():
         st.session_state.left_image = None
         st.session_state.right_image = None
         st.experimental_rerun()
+
+@st.cache
+def get_ip():
+    ip = st.request.headers.get('X-Forwarded-For', None)
+    if ip is None:
+        ip = st.request.remote_ip
+    return ip
+
+
+ip = get_ip()
     
 
 # Counter to keep track of submissions
@@ -223,4 +234,4 @@ else:
             st.session_state.left_image = left_image
             st.session_state.right_image = right_image
 
-
+        st.write("Your IP address:", ip)
